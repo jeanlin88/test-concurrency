@@ -1,0 +1,31 @@
+name: Deploy Reusable Workflow
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    concurrency:
+      group: test-deploy-${{ inputs.environment }}-jobs
+      cancel-in-progress: true
+    steps:
+      - run: echo "Job 1 [${{ inputs.environment }}] start at $(date)"
+      - run: sleep 60
+      - run: echo "Job 1 [${{ inputs.environment }}] done at $(date)"
+
+  job2:
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    concurrency:
+      group: test-deploy-${{ inputs.environment }}-jobs
+      cancel-in-progress: true
+    steps:
+      - run: echo "Job 2 [${{ inputs.environment }}] start at $(date)"
+      - run: sleep 300
+      - run: echo "Job 2 [${{ inputs.environment }}] done at $(date)"
