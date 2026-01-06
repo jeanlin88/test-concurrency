@@ -11,9 +11,6 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
-    concurrency:
-      group: test-deploy-${{ inputs.environment }}-jobs
-      cancel-in-progress: true
     steps:
       - run: echo "Job 1 [${{ inputs.environment }}] start at $(date)"
       - run: sleep 60
@@ -22,9 +19,7 @@ jobs:
   job2:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
-    concurrency:
-      group: test-deploy-${{ inputs.environment }}-jobs
-      cancel-in-progress: true
+    needs: job1
     steps:
       - run: echo "Job 2 [${{ inputs.environment }}] start at $(date)"
       - run: sleep 300
