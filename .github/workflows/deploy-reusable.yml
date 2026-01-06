@@ -22,5 +22,5 @@ jobs:
     needs: job1
     steps:
       - run: echo "Job 2 [${{ inputs.environment }}] start at $(date)"
-      - run: sleep 121
+      - run: sleep 122
       - run: echo "Job 2 [${{ inputs.environment }}] done at $(date)"
