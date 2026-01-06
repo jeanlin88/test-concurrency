@@ -5,6 +5,10 @@ on:
     tags:
       - 'test-v*'
 
+concurrency:
+  group: test-deploy-production
+  cancel-in-progress: true
+
 jobs:
   deploy:
     uses: ./.github/workflows/deploy-reusable.yml
