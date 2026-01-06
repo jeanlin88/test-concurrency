@@ -1,0 +1,12 @@
+name: Deploy Production
+
+on:
+  push:
+    tags:
+      - 'test-v*'
+
+jobs:
+  deploy:
+    uses: ./.github/workflows/deploy-reusable.yml
+    with:
+      environment: production
