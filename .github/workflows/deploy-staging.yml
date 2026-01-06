@@ -5,6 +5,10 @@ on:
     branches:
       - main
 
+concurrency:
+  group: test-deploy-staging
+  cancel-in-progress: true
+
 jobs:
   deploy:
     uses: ./.github/workflows/deploy-reusable.yml
